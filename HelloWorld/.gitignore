@@ -1,0 +1,6 @@
+/target
+/.settings
+/.svn
+/felix-cache
+/.classpath
+/.project
