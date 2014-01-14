@@ -28,7 +28,7 @@ public class MathServiceClientActivator implements BundleActivator {
 		ServiceReference reference = context
 				.getServiceReference(MathService.class.getName());
 		service = (MathService) context.getService(reference);
-		System.out.println(service.add(1, 2));
+		System.out.println("1+2=" + service.add(1, 2));
 	}
 
 	/*
@@ -37,6 +37,6 @@ public class MathServiceClientActivator implements BundleActivator {
 	 * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
 	 */
 	public void stop(BundleContext context) {
-		System.out.println(service.add(5, 6));
+		System.out.println("5+6=" + service.add(5, 6));
 	}
 }

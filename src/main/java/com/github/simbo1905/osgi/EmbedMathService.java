@@ -29,10 +29,10 @@ public class EmbedMathService {
 
 		installedBundles.add(context
 .installBundle("MathService-0.0.1", new FileInputStream(
-				"/Users/simbo/projects/osgi/maven1/MavenProject/target/MathService-0.0.1-SNAPSHOT.jar")));
+"./target/MathService-0.0.1-SNAPSHOT.jar")));
 		installedBundles.add(context
 .installBundle("MathServiceClient", new FileInputStream(
-				"/Users/simbo/projects/osgi/maven1/MavenProject/target/MathServiceClient-0.0.1-SNAPSHOT.jar")));
+"./target/MathServiceClient-0.0.1-SNAPSHOT.jar")));
 
 		for (Bundle bundle : installedBundles) {
 			if (bundle.getHeaders().get(Constants.FRAGMENT_HOST) == null)

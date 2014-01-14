@@ -1,22 +1,43 @@
-Goto  Eclipse Plugin directory in command prompt
 
-cd C:\setup\Eclipse\eclipse\plugins
+# OSGi Embedded Maven Demo
 
-type java -jar org.eclipse.osgi_3.6.1.R36x_v20100806.jar -console  or
+This maven project demonstrates embedding an osgi service into an application. 
 
-java -jar org.eclipse.osgi_[version].jar -console
+The service is taken from [OSGi Using Maven with Equinox by Ashwin Kumar](http://www.javacodegeeks.com/2011/06/osgi-using-maven-equinox.html)
 
+The code to embed bundles was taken from [How To Embed OSGi by Neil Bartlett](http://njbartlett.name/2011/03/07/embedding-osgi.html)
 
-now type ss to see all services
+I tried running with Equinox 3.8.x which gave NullPointerExceptions so I upgraded to Apache Felix. Given that its the same OSGi API switching the runtime had no impact. x
 
-Sample Commands to install services
+##Commands:
 
-install file:E:\AshwinOlympus\Ashwin\OSGI\MavenProject\target\HelloWorld-0.0.1-SNAPSHOT.jar
-install file:E:\AshwinOlympus\Ashwin\OSGI\MavenProject\target\MathService-0.0.1-SNAPSHOT.jar
-install file:E:\AshwinOlympus\Ashwin\OSGI\MavenProject\target\MathServiceClient-0.0.1-SNAPSHOT.jar
+```sh
+#build the main class
+mvn compile assembly:single
 
+#build the service bundle
+mvn -PMathService package
 
-Sample Commands to start and stop services
+#build the service client
+mvn -PMathServiceClient package
 
-start 1
-stop 1
+#run the main service which loads the two bundles
+java -jar ./target/HelloWorld-0.0.1-SNAPSHOT-jar-with-dependencies.jar
+
+```
+
+##Expected output:
+
+```sh
+Math Service Registered
+1+2=3
+awaiting stop
+```
+
+Press Ctrl+c to kill the process. 
+
+You may see cached output if you change the code so you may have to blow away the osgi container cache with: 
+
+```sh
+rm -rf felix-cache/
+```
